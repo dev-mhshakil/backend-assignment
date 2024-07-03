@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import productValidationSchema from './product.validation';
+import productValidationSchema from './product.zod.validation';
 import { ProductService } from './product.service';
 
 const createProduct = async (req: Request, res: Response) => {

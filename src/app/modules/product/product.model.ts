@@ -33,29 +33,32 @@ const inventorySchema = new Schema<TInventory>({
   },
 });
 
-const productSchema = new Schema<TProduct, ProductModel>({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 2,
-    maxLength: 50,
+const productSchema = new Schema<TProduct, ProductModel>(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 2,
+      maxLength: 50,
+    },
+    description: {
+      type: String,
+      required: true,
+      minlength: 20,
+      maxLength: 500,
+    },
+    price: { type: Number, required: true, min: 0 },
+    category: {
+      type: String,
+      required: true,
+      enum: ['Electronics', 'Clothing', 'Books', 'Home', 'Other'],
+    },
+    tags: [{ type: String, required: true }],
+    variants: [variantSchema],
+    inventory: inventorySchema,
   },
-  description: {
-    type: String,
-    required: true,
-    minlength: 20,
-    maxLength: 500,
-  },
-  price: { type: Number, required: true, min: 0 },
-  category: {
-    type: String,
-    required: true,
-    enum: ['Electronics', 'Clothing', 'Books', 'Home', 'Other'],
-  },
-  tags: [{ type: String, required: true }],
-  variants: [variantSchema],
-  inventory: inventorySchema,
-});
+  { timestamps: true },
+);
 
 export const Product = model<TProduct>('Product', productSchema);

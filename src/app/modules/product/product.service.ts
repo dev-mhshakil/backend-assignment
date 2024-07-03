@@ -12,7 +12,32 @@ const getProductsService = async () => {
   return products;
 };
 
+const getProductByIdService = async (id: string) => {
+  const result = await Product.findOne({ id });
+  return result;
+};
+
+const updateProductByIdService = async (id: string, productData: object) => {
+  const result = Product.updateOne({ id }, productData);
+  return result;
+};
+
+const deleteProductByIdService = async (id: string) => {
+  const result = await Product.deleteOne({ id });
+  return result;
+};
+
+const searchAProductService = async (searchTerm: string) => {
+  const regex = new RegExp(searchTerm, 'i'); // Case-insensitive search regex
+  const result = await Product.find({ name: { $regex: regex } }).exec();
+  return result;
+};
+
 export const ProductService = {
   createProductService,
   getProductsService,
+  getProductByIdService,
+  updateProductByIdService,
+  deleteProductByIdService,
+  searchAProductService,
 };

@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/products', ProductRoutes);
+app.use('/api/products/:productId', ProductRoutes);
 
 const getController = (req: Request, res: Response) => {
   res.send('Welcome to the Server');

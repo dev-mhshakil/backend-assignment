@@ -13,17 +13,18 @@ const getProductsService = async () => {
 };
 
 const getProductByIdService = async (id: string) => {
-  const result = await Product.findOne({ id });
+  const result = await Product.findOne({ _id: id });
+
   return result;
 };
 
 const updateProductByIdService = async (id: string, productData: object) => {
-  const result = Product.updateOne({ id }, productData);
+  const result = Product.updateOne({ _id: id }, productData);
   return result;
 };
 
 const deleteProductByIdService = async (id: string) => {
-  const result = await Product.deleteOne({ id });
+  const result = await Product.deleteOne({ _id: id });
   return result;
 };
 

@@ -22,8 +22,8 @@ const createProduct = async (req: Request, res: Response) => {
 
     res.status(500).json({
       success: false,
-      message: errorMessage,
-      error,
+      message: 'Product creation failed',
+      errorMessage,
     });
   }
 };
@@ -45,15 +45,15 @@ const getProducts = async (req: Request, res: Response) => {
 
     res.status(500).json({
       success: false,
-      message: errorMessage,
-      error,
+      message: 'Product not found',
+      errorMessage,
     });
   }
 };
 
 const getProductById = async (req: Request, res: Response) => {
   try {
-    const { id: productId } = req.params;
+    const { productId } = req.params;
     const result = await ProductService.getProductByIdService(productId);
 
     res.status(200).json({
@@ -70,15 +70,16 @@ const getProductById = async (req: Request, res: Response) => {
 
     res.status(500).json({
       success: false,
-      message: errorMessage,
-      error,
+      message: 'Product not found',
+      errorMessage,
     });
   }
 };
 
 const updateProduct = async (req: Request, res: Response) => {
   try {
-    const { id: productId } = req.params;
+    const { productId } = req.params;
+
     const productData = req.body;
     const zodParsedData = productValidationSchema.parse(productData);
     const result = await ProductService.updateProductByIdService(
@@ -99,8 +100,8 @@ const updateProduct = async (req: Request, res: Response) => {
 
     res.status(500).json({
       success: false,
-      message: errorMessage,
-      error,
+      message: 'Product not found',
+      errorMessage,
     });
   }
 };
@@ -124,8 +125,8 @@ const deleteProductById = async (req: Request, res: Response) => {
 
     res.status(500).json({
       success: false,
-      message: errorMessage,
-      error,
+      message: 'Product not found',
+      errorMessage,
     });
   }
 };
@@ -138,6 +139,13 @@ const searchAProduct = async (req: Request, res: Response) => {
     }
 
     const result = await ProductService.searchAProductService(searchTerm);
+
+    if (result.length === 0) {
+      res.status(500).json({
+        success: false,
+        message: 'Product not found',
+      });
+    }
     res.status(200).json({
       success: true,
       message: 'Product fetched successfully.',
@@ -152,8 +160,8 @@ const searchAProduct = async (req: Request, res: Response) => {
 
     res.status(500).json({
       success: false,
-      message: errorMessage,
-      error,
+      message: 'Product not found',
+      errorMessage,
     });
   }
 };

@@ -15,6 +15,12 @@ app.use('/api/products/:productId', ProductRoutes);
 // orders routes
 app.use('/api/orders', OrderRoutes);
 
+app.all('*', (req, res) => {
+  res.status(404).json({
+    message: 'Route not found',
+  });
+});
+
 const getController = (req: Request, res: Response) => {
   res.send('Welcome to the Server');
 };

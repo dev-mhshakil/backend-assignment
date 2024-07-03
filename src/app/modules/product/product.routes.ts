@@ -1,19 +1,25 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { ProductController } from './product.controller';
 
 const router = express.Router();
 
-router.route('/').get(ProductController.searchAProduct);
+// Search products by searchTerm
+router.get('/search', ProductController.searchAProduct);
 
-router
-  .route('/:productId')
-  .put(ProductController.updateProduct)
-  .get(ProductController.getProductById)
-  .delete(ProductController.deleteProductById);
+// CRUD operations for products
+router.post('/', ProductController.createProduct);
+router.get('/', ProductController.getProducts);
 
-router
-  .route('/')
-  .post(ProductController.createProduct)
-  .get(ProductController.getProducts);
+// Individual product operations
+router.get('/:productId', ProductController.getProductById);
+router.put('/:productId', ProductController.updateProduct);
+router.delete('/:productId', ProductController.deleteProductById);
+
+router.use((req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
 
 export const ProductRoutes = router;

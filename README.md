@@ -16,9 +16,10 @@ This project is an API for managing products and orders in an e-commerce applica
 
 1. Clone the repository:
 
-   ```sh
-   git clone https://github.com/dev-mhshakil/backend-assignment.git
+   ```ruby
+   mkdir ecommerce-api
    cd ecommerce-api
+   git clone https://github.com/dev-mhshakil/backend-assignment.git
 
    ```
 
@@ -32,8 +33,8 @@ This project is an API for managing products and orders in an e-commerce applica
 3. Set up environment variables:
    Create a .env file in the root directory and add your environment variables. For example:
 
-   ```sh
-   MONGODB_URI=mongodb://localhost:27017/ecommerce
+   ```ruby
+   MONGODB_URI=mongodb://localhost:27017
    PORT=5000
 
    ```
@@ -60,27 +61,27 @@ This project is an API for managing products and orders in an e-commerce applica
   - Method: `POST`
   - Request Body:
 
-  ```sh
+  ```ruby
   {
-  "name": "iPhone 13",
-  "description": "A sleek and powerful smartphone with cutting-edge features.",
-  "price": 999,
-  "category": "Electronics",
-  "tags": ["smartphone", "Apple", "iOS"],
-  "variants": [
-      {
-          "type": "Color",
-          "value": "Midnight Blue"
-      },
-      {
-          "type": "Storage Capacity",
-          "value": "256GB"
-      }
-  ],
-  "inventory": {
-      "quantity": 50,
-      "inStock": true
-  }
+    "name": "iPhone 13",
+    "description": "A sleek and powerful smartphone with cutting-edge features.",
+    "price": 999,
+    "category": "Electronics",
+    "tags": ["smartphone", "Apple", "iOS"],
+    "variants": [
+        {
+            "type": "Color",
+            "value": "Midnight Blue"
+        },
+        {
+            "type": "Storage Capacity",
+            "value": "256GB"
+        }
+    ],
+    "inventory": {
+        "quantity": 50,
+        "inStock": true
+    }
   }
 
   ```
@@ -116,12 +117,12 @@ This project is an API for managing products and orders in an e-commerce applica
   - Method: `POST`
   - Request Body:
 
-  ```sh
+  ```ruby
   {
-  "email": "customer@example.com",
-  "productId": "60c72b2f9b1e8e1a4c8d2c9f",
-  "quantity": 1,
-  "price": 999
+    "email": "customer@example.com",
+    "productId": "60c72b2f9b1e8e1a4c8d2c9f",
+    "quantity": 1,
+    "price": 999
   }
 
   ```
@@ -154,7 +155,7 @@ The API provides standard error responses for various error scenarios.
 
 - Insufficient Quantity Error
 
-  ```sh
+  ```ruby
   {
       "success": false,
       "message": "Insufficient quantity available in inventory"
@@ -164,7 +165,7 @@ The API provides standard error responses for various error scenarios.
 
 - Not Found Error
 
-  ```sh
+  ```ruby
   {
       "success": false,
       "message": "Order not found"
@@ -173,7 +174,7 @@ The API provides standard error responses for various error scenarios.
   ```
 
 - Not Found Route
-  ```sh
+  ```ruby
   {
       "success": false,
       "message": "Route not found"

@@ -1,4 +1,5 @@
 import {
+  ProductMethods,
   ProductModel,
   TInventory,
   TProduct,
@@ -33,7 +34,7 @@ const inventorySchema = new Schema<TInventory>({
   },
 });
 
-const productSchema = new Schema<TProduct, ProductModel>(
+const productSchema = new Schema<TProduct, ProductModel, ProductMethods>(
   {
     name: {
       type: String,
@@ -61,4 +62,15 @@ const productSchema = new Schema<TProduct, ProductModel>(
   { timestamps: true },
 );
 
-export const Product = model<TProduct>('Product', productSchema);
+// creating custom static method
+
+productSchema.methods.isProductExists = async function (name: string) {
+  const existingProduct = await Product.findOne({ name });
+  return existingProduct;
+};
+
+// productSchema.statics.isProductExists = async function (name: string) {
+//   return this.findOne({ name });
+// };
+
+export const Product = model<TProduct, ProductModel>('Product', productSchema);

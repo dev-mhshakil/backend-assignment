@@ -20,4 +20,12 @@ export type TProduct = {
   inventory: TInventory;
 };
 
-export type ProductModel = Model<TProduct>;
+export type ProductMethods = {
+  isProductExists(name: string): Promise<TProduct | null>;
+};
+
+export type ProductModel = Model<
+  TProduct,
+  Record<string, never>,
+  ProductMethods
+>;

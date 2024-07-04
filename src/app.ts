@@ -8,6 +8,12 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
+const getController = (req: Request, res: Response) => {
+  res.send('Welcome to the Server');
+};
+
+app.get('/', getController);
+
 // products routes
 app.use('/api/products', ProductRoutes);
 app.use('/api/products/:productId', ProductRoutes);
@@ -20,11 +26,5 @@ app.all('*', (req, res) => {
     message: 'Route not found',
   });
 });
-
-const getController = (req: Request, res: Response) => {
-  res.send('Welcome to the Server');
-};
-
-app.get('/', getController);
 
 export default app;
